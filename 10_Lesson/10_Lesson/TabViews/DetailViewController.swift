@@ -51,7 +51,7 @@ class DetailViewController: UIViewController {
         titleLabel.textColor = .white
         titleLabel.numberOfLines = 0
         
-        // Настройка метаданных
+        // Настройка данных
         metadataStack.axis = .vertical
         metadataStack.spacing = 8
         
@@ -84,11 +84,9 @@ class DetailViewController: UIViewController {
         }
         
         titleLabel.text = meme.title
-        
-        // Очищаем предыдущие метаданные
         metadataStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
-        // Добавляем метаданные
+        // Добавляем данные
         addMetadataItem(icon: "arrow.up", text: "\(meme.ups) лайков")
         addMetadataItem(icon: "bubble.left", text: "\(meme.num_comments) комментариев")
         addMetadataItem(icon: "person", text: meme.author)

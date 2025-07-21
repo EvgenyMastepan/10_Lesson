@@ -77,13 +77,13 @@ final class MemeCell: UIView {
     }
     
     private func setupTap() {
-        isUserInteractionEnabled = true // Важно!
+        isUserInteractionEnabled = true 
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapCell))
         addGestureRecognizer(tap)
     }
     
     @objc private func didTapCell() {
-        // Обработка нажатия будет в контроллере
+        // Обработка будет в контроллере
     }
     
     private func loadImage(from urlString: String?) {

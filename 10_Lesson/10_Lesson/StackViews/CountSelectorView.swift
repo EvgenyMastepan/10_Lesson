@@ -26,7 +26,7 @@ final class CountSelectorView: UIView {
     }
     
     private func setupUI() {
-        backgroundColor = UIColor(red: 0.05, green: 0.05, blue: 0.05, alpha: 1)
+        backgroundColor = .backgroundColor
         layer.cornerRadius = 8
         
         stackView.axis = .horizontal
@@ -37,7 +37,7 @@ final class CountSelectorView: UIView {
             let button = UIButton(type: .system)
             button.setTitle("\(number)", for: .normal)
             button.setTitleColor(.white, for: .normal)
-            button.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
+            button.backgroundColor = .buttonBackgroundColor
             button.layer.cornerRadius = 6
             button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
             button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)

@@ -143,7 +143,7 @@ final class StackViewController: UIViewController {
         guard let cell = sender.view as? MemeCell else { return }
         let selectedMeme = currentMemes[cell.tag]
         
-        // Проверяем переход
+        // Отладочная информация! Можно удалять. Проверяем переход.
         print("Нажат мем с ID: \(selectedMeme.id)")
         
         guard let tabBar = tabBarController as? MainTabBarController,

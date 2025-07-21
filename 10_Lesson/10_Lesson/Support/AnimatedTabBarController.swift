@@ -8,17 +8,37 @@
 import UIKit
 
 class AnimatedTabBarController: UITabBarController {
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        guard let tabIndex = tabBar.items?.firstIndex(of: item) else { return }
-        
-        let animation = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut) {
-            if let tabView = tabBar.subviews[tabIndex + 1] as? UIView {
-                tabView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-            }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        delegate = self
+    }
+}
+
+extension AnimatedTabBarController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController,
+                         shouldSelect viewController: UIViewController) -> Bool {
+        guard let viewControllers = viewControllers,
+              let selectedIndex = viewControllers.firstIndex(of: viewController),
+              let tabBarItems = tabBar.items,
+              selectedIndex < tabBarItems.count else {
+            return true
         }
-        animation.addAnimations({
-            tabBar.subviews[tabIndex + 1].transform = .identity
-        }, delayFactor: 0.3)
-        animation.startAnimation()
+        
+        animateTabBarItem(at: selectedIndex)
+        return true
+    }
+    
+    private func animateTabBarItem(at index: Int) {
+        let tabBarButtons = tabBar.subviews.compactMap { $0 as? UIControl }
+        guard index < tabBarButtons.count else { return }
+        
+        let button = tabBarButtons[index]
+        let animation = CAKeyframeAnimation(keyPath: "transform.scale")
+        animation.values = [1.0, 1.2, 0.9, 1.1, 1.0]
+        animation.duration = 0.5
+        animation.calculationMode = .cubic
+        
+        button.layer.add(animation, forKey: "bounce")
     }
 }
